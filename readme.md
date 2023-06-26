@@ -1,6 +1,6 @@
-# [Haunted-house](https://haunted-house.kyledlong.com)
+# [Particles](https://particles.kyledlong.com)
 
-This haunted-house project was built in the progress of the [Three.js journey](https://threejs-journey.com) course, focusing on gemoetry, materials, lighting and shadows.
+This particles project was built in the progress of the [Three.js journey](https://threejs-journey.com) course, focusing on gemoetry, materials, lighting and shadows.
 <br>
 
 ## Tech
@@ -26,13 +26,13 @@ This project is a basic static website created using HTML, CSS, and JavaScript. 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/KD-Long/haunted-house.git
+git clone https://github.com/KD-Long/particles.git
 ```
 
 2. Install the dependencies:
 
 ```bash
-cd haunted-house
+cd particles
 npm install
 ```
 
@@ -65,4 +65,4 @@ git push -u origin main
 
 4. Automatic deployment --> ~/public_html/_sub_haunted-house/
 
-5. Configured sub domain [haunted-house.kyledlong.com](haunted-house.kyledlong.com) to point to "_sub_haunted-house/" folder
+5. Configured sub domain [particles.kyledlong.com](particles.kyledlong.com) to point to "_sub_haunted-house/" folder
