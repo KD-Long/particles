@@ -25,42 +25,45 @@ const particleTexture = textureLoader.load('/textures/particles/2.png')
 /**
  * Particles
  */
-// Geometry
-const particlesGeometry = new THREE.BufferGeometry()
+//GEO
+const particlesGeo = new THREE.SphereGeometry(1,32,32)
+//Material
+const particleMat = new THREE.PointsMaterial({ 
+    map:particleTexture,
+    size:0.022,
+    sizeAttenuation: true,
+    transparent:true,
+    alphaMap:particleTexture,
+    vertexColors:true,
+    blending: THREE.AdditiveBlending
+})
+//options to fix depth of particles
+// particleMat.alphaTest=0.001
+// particleMat.depthTest=false
+particleMat.depthWrite = false
+
+
+const particle = new THREE.Points(particlesGeo,particleMat)
+
+ scene.add(particle)
+
+// custom particles
+
+const particleCustomGeo= new THREE.BufferGeometry()
 const count = 50000
 
-const positions = new Float32Array(count * 3)
-const colors = new Float32Array(count * 3)
+const positions = new Float32Array(count*3)
+const color = new Float32Array(count*3)
 
-for(let i = 0; i < count * 3; i++)
-{
-    positions[i] = (Math.random() - 0.5) * 10
-    colors[i] = Math.random()
+for(let i=0;i<count*3;i++){
+    positions[i] = (Math.random()-0.5) * 10
+    color[i]= Math.random()
 }
+particleCustomGeo.setAttribute('position',new THREE.BufferAttribute(positions,3))
+particleCustomGeo.setAttribute('color',new THREE.BufferAttribute(color,3))
+const pc = new THREE.Points(particleCustomGeo,particleMat)
 
-particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
-
-// Material
-const particlesMaterial = new THREE.PointsMaterial()
-
-particlesMaterial.size = 0.1
-particlesMaterial.sizeAttenuation = true
-
-particlesMaterial.color = new THREE.Color('#ff88cc')
-
-particlesMaterial.transparent = true
-particlesMaterial.alphaMap = particleTexture
-// particlesMaterial.alphaTest = 0.01
-// particlesMaterial.depthTest = false
-particlesMaterial.depthWrite = false
-particlesMaterial.blending = THREE.AdditiveBlending
-
-particlesMaterial.vertexColors = true
-
-// Points
-const particles = new THREE.Points(particlesGeometry, particlesMaterial)
-scene.add(particles)
+//scene.add(pc)
 
 /**
  * Sizes
@@ -115,16 +118,6 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
-
-    // Update particles
-    for(let i = 0; i < count; i++)
-    {
-        let i3 = i * 3
-
-        const x = particlesGeometry.attributes.position.array[i3]
-        particlesGeometry.attributes.position.array[i3 + 1] = Math.sin(elapsedTime + x)
-    }
-    particlesGeometry.attributes.position.needsUpdate = true
 
     // Update controls
     controls.update()
